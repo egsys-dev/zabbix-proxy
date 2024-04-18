@@ -1,23 +1,14 @@
 version: '3'
+
 services:
-    {{APLICACAO}}-{{NOME_DO_PROJETO}}:
-        container_name: {{APLICACAO}}-{{NOME_DO_PROJETO}}
-        image: {{APLICACAO}}-{{NOME_DO_PROJETO}}
-        build:
-            context: ./
-            dockerfile: Dockerfile
-        ports:    
-            - "{{PORTA_DO_SERVIDOR}}:{{PORTA_DO_PROJETO}}"
-        volumes:
-            - './service/build/lib/:/var/{{APLICACAO}}-{{NOME_DO_PROJETO}}/lib/'
-            - './service/build/config/:/var/{{APLICACAO}}-{{NOME_DO_PROJETO}}/config/'
-            - './service/build/logs/:/var/{{APLICACAO}}-{{NOME_DO_PROJETO}}/logs/'
-        restart: 'always'
-        networks:
-            default:
-                ipv4_address: {{IP_DA_NETWORK}}
-        command: ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/var/{{APLICACAO}}-{{NOME_DO_PROJETO}}/lib/{{NOME_DO_PROJETO}}.jar"]
-networks:
-  default:
-   external:
-     name: {{NOME_DO_PROJETO}}-network
+  zabbix-proxy:
+    image: INDIQUE O ENDEREÇO DA IMAGEM QUE SERÁ USADA
+    container_name: INDIQUE O NOME DO CONTAINER
+    restart: always
+    ports:
+      - "10051:10051" ##porta padrão do proxy
+    environment:
+      - ZBX_HOSTNAME= NOME DO PROXY QUE FOI DEFINIDO NO PAINEL DO ZABBIX
+      - ZBX_SERVER_HOST= ENDEREÇO IP DO SERVIDOR DO ZABBIX
+    volumes:
+      - /var/log/zabbix/zabbix_proxy:/var/log/zabbix/
