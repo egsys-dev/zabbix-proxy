@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  zabbix-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: zabbix-proxy
+    restart: always
+    ports:
+      - "10051:10051"
+    volumes:
+      - /etc/zabbix/:/etc/zabbix/
+      - /run/zabbix:/run/zabbix
+      - /var/log/zabbix:/var/log/zabbix/
+

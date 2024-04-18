@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  zabbix-proxy:
+    image: zabbix/zabbix-proxy-sqlite3:6.0.0-ubuntu
+    container_name: docker-zabbix-proxy
+    restart: always
+    ports:
+      - "10051:10051"
+    environment:
+      - ZBX_HOSTNAME=Proxy-PR
+      - ZBX_SERVER_HOST=167.71.244.86
+    volumes:
+      - /var/log/zabbix/zabbix_proxy:/var/log/zabbix/
+
