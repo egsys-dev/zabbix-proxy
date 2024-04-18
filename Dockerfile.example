@@ -1,0 +1,9 @@
+# Start with a base image containing Java runtime
+FROM adoptopenjdk/openjdk8-openj9:alpine-slim
+
+# Timezone
+RUN apk add tzdata
+ENV TZ 'America/Sao_Paulo'
+RUN echo $TZ > /etc/timezone
+
+WORKDIR /var/{{APLICACAO}}-{{NOME_DO_PROJETO}}
